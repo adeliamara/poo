@@ -1,0 +1,56 @@
+1.
+Classe é a abstração do que há em comum (características e comportamentos) de um determinado conjunto de objetivos.
+ Ou seja, a classe é um modelo já o objeto seria a classe materializada. O objeto seria, portanto, uma instância da classe.
+Exemplo: 
+  classe: mamíferos
+  objetos: elefante, leão etc
+
+
+2. 
+Atributos são as características de um objeto e métodos são os comportamentos de um determinado objeto quando solicitado.
+
+exemplo: 
+
+class Mamifero{
+
+exemplo atributos: nome, peso,altura, cor;
+
+exemplo métodos: mover, beber, pular;
+
+}
+
+
+3. 
+Peso
+Sistemas de saude/Nutrição
+
+Tipo de CNH
+Sistemas de transporte/Detran
+
+Tipo Sanguíneo
+Sistema de saúde/Banco de sangue
+
+Habilidade destra
+Sistemas de acessibilidade
+]
+Percentual de gordura
+Sistemas de saude/Nutrição
+
+Saldo em conta
+Sistema bancário
+
+Etnia
+Sistema de mapeamento da população como o IBGE
+
+
+4. a) Sim. A informação de titularidade da conta é uma informação essencial neste caso.
+
+4. b) Sim. Considerando o mundo real, uma pessoa pode ter mais de uma conta. O conjunto de contas poderia ser armazenado em um vetor já que são dados de um mesmo tipo.
+
+
+5.
+Aluno, professor, disciplina, curso, sala.
+
+
+
+as demais soluções estão em anexo
