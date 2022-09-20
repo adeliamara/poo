@@ -1,0 +1,51 @@
+1. Qual a diferença entre tipagem dinâmica e tipagem estática?
+	Na tipagem dinâmicica o tipo é inferido pelo valor do dado e a checagem (type checking) é feita em tempo de execução. 
+		exemplos: Python, Perl, Ruby, PHP, FoxPro e Lisp.
+	Na tipagem estática, o tipo é inferido pela varíavel e o type checking é feito no tempo de compilação.Assim, o desenvolvedor não pode mais alterar o tipo de variavél depois de declarada.
+		exemplos:  C, C++, Java
+Algumas linguagens estáticas podem fazer a inferência de tipo na declaração de variáveis, mas não permite que o tipo seja alterado após a declaração, como o C#.
+É interessante notar, também, que linguagens com tipagem dinâmica não têm necessariamente tipagem fraca, como vimos acima com Python.
+
+Exemplos de linguagens com tipagem dinâmica e forte: Python, Ruby, Erlang, Clojure
+
+Exemplos de linguagens com tipagem dinâmica e fraca: JavaScript, PHP, Perl
+
+Exemplos de linguagens com tipagem estática e forte: C#, Java, Scala
+
+Exemplos de linguagens com tipagem estática e fraca: C, C++
+
+2. Qual o principal problema do uso de tipagem dinâmica?
+
+	O programa está mais sucetível a erros (muitos códigos executam, mesmo que retornem resultados não esperados). Como o type checking é feito em tempo de execução, alguns erros serão visíveis aos usuários.
+
+3. Pesquise um exemplo na internet em que a tipagem dinâmica pode ser problemático.
+
+const numberOne = "5"
+const numberTwo = 5
+console.log(numberOne + numberTwo)
+
+Neste caso mesmo o dado numberTwo sendo number ele é convertido para string para que possa fazer a concatenação com a string.
+
+4. Pesquise e exemplifique com um exemplo porque dizemos que a linguagem C, mesmo tendo tipagem estática, possui tipagem fraca.
+
+#include <stdio.h>
+
+int main()
+{
+    int a = 4.4;
+    int b = 1.2;
+    printf("%d", a + b);
+
+    return 0;
+}
+
+5. Exemplo tipo any benefico
+
+Segundo a documentacao, esse tipo pode ser usado sempre que não quiser que um valor específico cause erros de type-check. Logo, poderiamos usar esse tipo em uma seção do código para ser dinâmica ou semelhante ao 
+JavaScript, ou para contornar as limitações do sistema de tipos.
+
+
+6. Poderíamos dizer que a tipagem do TypeScript é fraca por uma variável do tipo
+number aceitar tanto inteiros como ponto flutuante?
+
+Não, pois o tipo number é tipo básico da linguagem. O que a caracteriza como tipagem forte é o fato do tipo não poder ser alterado depois de declarado.
