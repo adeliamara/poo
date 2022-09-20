@@ -39,8 +39,13 @@ int main()
     return 0;
 }
 
+5. Exemplo tipo any benefico
 
-5. Poderíamos dizer que a tipagem do TypeScript é fraca por uma variável do tipo
+Segundo a documentacao, esse tipo pode ser usado sempre que não quiser que um valor específico cause erros de type-check. Logo, poderiamos usar esse tipo em uma seção do código para ser dinâmica ou semelhante ao 
+JavaScript, ou para contornar as limitações do sistema de tipos.
+
+
+6. Poderíamos dizer que a tipagem do TypeScript é fraca por uma variável do tipo
 number aceitar tanto inteiros como ponto flutuante?
 
 Não, pois o tipo number é tipo básico da linguagem. O que a caracteriza como tipagem forte é o fato do tipo não poder ser alterado depois de declarado.
