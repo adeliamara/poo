@@ -1,0 +1,5 @@
+10. A abordagem da questão 8 é retornar códigos de erro ou acerto. Já a da questão
+10.f. é desconsiderar a alteração. Quais das duas você acha mais correta?
+Compare com seus códigos escritos em outras disciplinas.
+
+A abordagem da questao 8. Pois nesse caso, ocorre a sinalização de possíveis erros gerados na execução dos metodos.

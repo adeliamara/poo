@@ -1,0 +1,27 @@
+4. Considerando o uso da classe Conta apresentada em aula e seu uso abaixo:
+
+
+let c1: Conta = new Conta("1",100);
+let c2: Conta = new Conta("2",100);
+let c3: Conta;
+c1 = c2;
+c3 = c1;
+c1.sacar(10);
+
+c1.transferir(c2,50);
+console.log(c1.consultarSaldo());
+console.log(c2.consultarSaldo());
+console.log(c3.consultarSaldo());
+
+
+a. Qual o resultado dos dois "prints"? Justifique sua resposta.
+Todos resultarão em 90.
+
+c1, c2 e c3 estão referenciando a conta 2. Então, o resultado exibido nos três prints é o saldo da conta 2.
+
+Então, após sacar 10, o saldo será 90. Ao realizar a transferencia entre c1 e c2 estamos na verdade realizando a 
+transferencia de uma mesma conta, portanto, o saldo seguirá como c2.
+
+b. O que acontece com o objeto para o qual a referência c1 apontava?
+O objeto segue existindo com um espaço na memória reservado para ele e com valor 100, mas não é mais referenciado
+por nenhuma das vaiaveis;

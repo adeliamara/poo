@@ -1,0 +1,22 @@
+1. Suponha uma classe Hotel que sirva apenas para guardar a quantidade de
+solicitações de reservas feitas conforme abaixo:
+
+class Hotel {
+	quantReservas : number;
+	adicionarReserva() : void {
+		quantReservas++;
+	}
+}
+Podemos afirmar que haverá um problema de compilação, pois a variável inteira não
+foi inicializada previamente? Justifique.
+
+
+Solução:
+
+Haverá um erro de compilação devido a não utilização da palavra reservada "this" dentro do método adicionarReserva().
+Corrigino isso, se o strictPropertyInicialization estiver como true, haverá outro erro de compilação pois a propriedade 'quantReservas' não foi inicializada então não é possível operar com ela.
+Se estiver setado como false, não haverá erro de compilação mas haverá um comportamento inesperado ao incrementar uma 
+variavel undefined.
+
+
+
