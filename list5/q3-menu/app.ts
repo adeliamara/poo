@@ -1,13 +1,11 @@
-//nao finalizada
-
 import prompt from 'prompt-sync'
 
 const input = prompt({
     sigint: false
 })
 
-import Banco from "../q1/conta";
-import Conta from "../q1/banco";
+import Conta from "../q1/conta";
+import Banco from "../q1/banco";
 
 function get_number_in_range(mensagem: string, minimo: number, maximo: number): number {
     let number: number = get_number(mensagem)
@@ -36,8 +34,7 @@ function get_number(msg: string): number {
 function cadastrar(): void {
     let numero: string = input('Digite o número da conta: ');
 
-    let conta: Conta;
-    conta = new Conta (numero);
+    let conta: Conta = new Conta(numero);
     banco.inserir(conta);
 }
 
@@ -46,8 +43,8 @@ function consultar(): void {
     let numero: string = input('Digite o número da conta: ');
     let conta: Conta = banco.consultar(numero);
 
-    if (conta.contaJaExiste(numero)) {
-        console.log(`\nTitular: ${conta.titular}, numero: ${conta.numero}\n`);
+    if (banco.contaJaExiste(numero)) {
+        console.log(`numero: ${conta.numero} e saldo:${conta.saldo}`);
     } else {
         console.log(`\nConta eh invalida!\n`);
 
@@ -69,7 +66,7 @@ function depositar(): void {
 function transferir(): void {
     let numeroOrigem: string = input('Digite o número da conta de origem: ');
     let numeroDestino: string = input('Digite o número da conta de destino: ');
-    let valor: number = input(`Valor: `);
+    let valor: number = Number(input(`Valor: `));
     banco.transferir(numeroOrigem, numeroDestino, valor);
 }
 
