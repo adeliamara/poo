@@ -1,11 +1,18 @@
-const input = require('prompt-sync')();
-const print = (message: string) => console.log(message);
-import Banco from "../q1/conta.js";
-import Conta from "../q1/banco.js";
-function get_number_in_range(mensagem, minimo, maximo){
-    let number = get_number(mensagem)
-    
-    while (number < minimo || number > maximo){
+//nao finalizada
+
+import prompt from 'prompt-sync'
+
+const input = prompt({
+    sigint: false
+})
+
+import Banco from "../q1/conta";
+import Conta from "../q1/banco";
+
+function get_number_in_range(mensagem: string, minimo: number, maximo: number): number {
+    let number: number = get_number(mensagem)
+
+    while (number < minimo || number > maximo) {
         console.log(`O número (${number}) nao esta dentro do intervalo [${minimo}, ${maximo}]. Digite um numero dentro do intervalo: `)
         number = get_number(mensagem)
     }
@@ -14,8 +21,8 @@ function get_number_in_range(mensagem, minimo, maximo){
 
 }
 
-function get_number(msg) {
-    let value = Number(input(msg))
+function get_number(msg: string): number {
+    let value: number = Number(input(msg))
     if (isNaN(value)) {
         console.log('Favor digite um valor numérico')
         value = get_number(msg)
@@ -27,89 +34,77 @@ function get_number(msg) {
 
 
 function cadastrar(): void {
-    print("\nCadastrar conta\n");
     let numero: string = input('Digite o número da conta: ');
-    let titular: string = input('Digite o seu nome: ');
-        
-        let conta: Conta;
-        conta = new Conta(titular, numero);
-        banco.inserir(conta);
-    }
+
+    let conta: Conta;
+    conta = new Conta (numero);
+    banco.inserir(conta);
+}
 
 
 function consultar(): void {
-    print("\nConsultar conta\n");
     let numero: string = input('Digite o número da conta: ');
     let conta: Conta = banco.consultar(numero);
 
-    if(conta != undefined) {
-        print(`\nTitular: ${conta.titular}, numero: ${conta.numero}\n`);
+    if (conta.contaJaExiste(numero)) {
+        console.log(`\nTitular: ${conta.titular}, numero: ${conta.numero}\n`);
     } else {
-        print(`\nConta não encontrada!\n`);
-        
+        console.log(`\nConta eh invalida!\n`);
+
     }
 }
 
-function sacar():void  {
-    print("\nSaque\n");
-    
-    let numero: string = input('Digite o número da conta: ');
-    let valor: number = Number(input(`Valor: `));
-    banco.sacar(numero,valor);
+function sacar(): void {
+    let numero: string = input('Digite o número da conta a sacar: ');
+    let valor: number = Number(input(`Insira o valor: `));
+    banco.sacar(numero, valor);
 }
 
 function depositar(): void {
-    print("\nDepósito\n");
-    let numero: string = input('Digite o número da conta: ');
-    let valor: number = Number(input(`Valor: `));
-    banco.depositar(numero,valor);
+    let numero: string = input('Digite o número da conta a realizar deposito: ');
+    let valor: number = Number(input(`Insira o valor: `));
+    banco.depositar(numero, valor);
 }
 
 function transferir(): void {
-    print("\nTransferência\n");
-    let numeroCredito: string = input('Digite o número da conta a ser creditada: ');
-    let numeroDebito: string = input('Digite o número da conta a ser debitada: ');
+    let numeroOrigem: string = input('Digite o número da conta de origem: ');
+    let numeroDestino: string = input('Digite o número da conta de destino: ');
     let valor: number = input(`Valor: `);
-    banco.transferir(numeroCredito, numeroDebito, valor);
+    banco.transferir(numeroOrigem, numeroDestino, valor);
 }
 
 
-function excluir(): void {
-    print("\nExcluir conta\n");
-    let numero: string = input('Digite o número da conta: ');
-    
-    let exclusao: string = input('Confirmar (S/N): ');
-    
-    if( exclusao.toLocaleUpperCase() == 'S') {
-        banco.excluir(numero);
-        print("conta excluída")
-    } else if(exclusao.toLocaleUpperCase() == 'N') {
-        print("conta mantida")
+
+
+const banco: Banco = new Banco();
+
+function main() {
+
+
+    const texto_menu: string =
+        "Selecione uma operacao:\n" +
+        "\t1 - Cadastrar\n\t2 - Consultar\n\t3 - Sacar\n\t4 - Depositar\n\t5 - Transferir\n\t0 - Sair\n";
+
+    while (true) {
+        const opcao: number = get_number_in_range(texto_menu, 0, 6);
+
+        if (opcao != 0) {
+            if (opcao == 1) cadastrar();
+            if (opcao == 2) consultar();
+            if (opcao == 3) sacar();
+            if (opcao == 4) depositar();
+            if (opcao == 5) transferir();
+        }
+        else {
+            break;
+        }
+
+
+        input("Operação realizada com sucesso. Tecle enter...");
+
+        console.clear();
     }
 }
 
-const banco: Banco = new Banco();
-    
-const texto_menu: string =
-    "Selecione uma operacao:\n" +
-    "\t1 - Cadastrar\n\t2 - Consultar\n\t3 - Sacar\n\t4 - Depositar\n\t5 - Excluir6 - Transferir\n\t0 - Sair\n";
-    
-while (true) {
-    const opcao: number = get_number_in_range(texto_menu,0,6);
-    
-        if(opcao != 0) {
-           if(opcao == 1) cadastrar();
-           if(opcao == 2) consultar();
-           if(opcao == 3) excluir();
-           if(opcao == 4) sacar();
-           if(opcao == 5) depositar();
-           if(opcao == 6) transferir();
 
-        } 
-        else {break;}
-
-
-    input("Operação finalizada. Digite <enter>");
-
-    console.clear();
-}
+main()
