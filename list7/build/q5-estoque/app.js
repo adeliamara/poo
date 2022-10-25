@@ -88,9 +88,24 @@ function replanish() {
 function listProducts() {
     stock.listProductsInStock();
 }
+function productIsValid() {
+    const identifier = (0, io_utils_1.input)('Digite o id desejado: ');
+    let product = stock.consult(identifier);
+    if (product instanceof perishableProduct_1.default) {
+        if (product.isValid()) {
+            console.log("É válido! ");
+        }
+        else {
+            console.log('Produto vencido!');
+        }
+        console.log(`Data de validade: ${product.expirationDate}`);
+        return;
+    }
+    console.log('Operação inválida! Produto não perecivel nao possui data de validade!');
+}
 function loadFileAndInsert() {
-    console.log('digite o nome do arquivo com o formato: \n\texemplo: arquivo.txt: \t');
-    const fileName = (0, io_utils_1.input)('> ');
+    console.log('Realizando leitura do arquivo-contas.txt: \t');
+    const fileName = 'arquivo.txt';
     const arquivo_string = (0, io_utils_1.loadFile)(fileName);
     if (arquivo_string != undefined) {
         let products = arquivo_string.split('\n');
@@ -126,13 +141,14 @@ function show_menu() {
     \t3 - Dar baixa produto \n
     \t4 - Repor produto\n
     \t5 - Listar produtos \n
-    \t6 - Carregar arquivo produtos \n
+    \t6 - Verificar se produto é valido \n
+    \t7 - Carregar arquivo produtos \n
     \t0 - Sair\n`;
     console.log(texto);
 }
 const stock = new stock_1.default();
 function main() {
-    const opcoes_disponiveis = new Array(insert, searchProduct, writeOff, replanish, listProducts, loadFileAndInsert);
+    const opcoes_disponiveis = new Array(insert, searchProduct, writeOff, replanish, listProducts, productIsValid, loadFileAndInsert);
     while (true) {
         show_menu();
         const opcao = (0, io_utils_1.get_number_in_range)(0, opcoes_disponiveis.length);

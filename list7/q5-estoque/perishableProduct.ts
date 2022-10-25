@@ -33,4 +33,10 @@ export default class PerishableProduct extends Product {
         return false;
     }
 
+    
+    public get expirationDate() : string {
+        return this._expirationDate.toString();
+    }
+    
+
 }

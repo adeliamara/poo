@@ -39,8 +39,9 @@ export default class Conta {
     public transferir(contaDestino: Conta, valor: number): boolean {
         if (this.debitar(valor)) {
             contaDestino.depositar(valor);
+            return true;
         }
-        return valor <= this._saldo;
+        return false;
 
     }
 }

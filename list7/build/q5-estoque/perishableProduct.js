@@ -29,5 +29,8 @@ class PerishableProduct extends product_1.default {
         }
         return false;
     }
+    get expirationDate() {
+        return this._expirationDate.toString();
+    }
 }
 exports.default = PerishableProduct;

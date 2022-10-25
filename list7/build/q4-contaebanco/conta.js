@@ -27,8 +27,9 @@ class Conta {
     transferir(contaDestino, valor) {
         if (this.debitar(valor)) {
             contaDestino.depositar(valor);
+            return true;
         }
-        return valor <= this._saldo;
+        return false;
     }
 }
 exports.default = Conta;

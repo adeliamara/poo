@@ -93,8 +93,8 @@ function renderJuros(): void {
 }
 
 function recuperarArquivoECadasrar() {
-    console.log('digite o nome do arquivo com o formato: \n\texemplo: arquivo.txt: \t');
-    const fileName = input('> ');
+    console.log('Realizando leitura do arquivo-contas.txt: \t');
+    const fileName = 'arquivo-contas.txt'
 
     const arquivo_string: string | undefined = loadFile(fileName);
 

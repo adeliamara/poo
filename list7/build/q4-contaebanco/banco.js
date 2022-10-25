@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const contaImposto_1 = __importDefault(require("./contaImposto"));
 const poupanca_1 = __importDefault(require("./poupanca"));
 class Banco {
     constructor(contas = []) {
@@ -53,6 +54,10 @@ class Banco {
     depositar(numero, valor) {
         let conta = this.consultar(numero);
         if (this.contaJaExiste(numero)) {
+            if (conta instanceof contaImposto_1.default) {
+                conta.depositar(valor);
+                return true;
+            }
             conta.depositar(valor);
             return true;
         }
@@ -60,19 +65,26 @@ class Banco {
     }
     debitar(numero, valor) {
         let conta = this.consultar(numero);
+        let sucesso = false;
         if (this.contaJaExiste(numero)) {
-            conta.debitar(valor);
-            return true;
+            if (conta instanceof contaImposto_1.default) {
+                sucesso = conta.debitar(valor);
+            }
+            else {
+                sucesso = conta.debitar(valor);
+            }
         }
-        return false;
+        return sucesso;
     }
-    transferir(numeroCredito, numeroDebito, valor) {
+    transferir(numeroDebito, numeroCredito, valor) {
+        let sucesso = false;
         if (this.contaJaExiste(numeroCredito) && this.contaJaExiste(numeroCredito)) {
-            let contaCredito = this.consultar(numeroCredito);
-            let contaDebito = this.consultar(numeroDebito);
-            contaDebito.transferir(contaCredito, valor);
+            if (this.debitar(numeroDebito, valor)) {
+                this.depositar(numeroCredito, valor);
+                sucesso = true;
+            }
         }
-        return this.contaJaExiste(numeroCredito) && this.contaJaExiste(numeroCredito);
+        return sucesso;
     }
     consultarQuantidadeContas() {
         return this._contas.length;

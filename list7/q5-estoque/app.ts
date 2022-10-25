@@ -95,9 +95,26 @@ function listProducts(): void{
     stock.listProductsInStock();
 }
 
+function productIsValid(): void {
+    const identifier = input('Digite o id desejado: ')
+    let product: Product = stock.consult(identifier);
+
+    if(product instanceof PerishableProduct){
+        if((<PerishableProduct> product).isValid()){
+            console.log("É válido! ");
+        }else{
+            console.log('Produto vencido!');
+        }
+        console.log(`Data de validade: ${(<PerishableProduct> product).expirationDate}`)
+        return;
+    }
+
+    console.log('Operação inválida! Produto não perecivel nao possui data de validade!')
+}
+
 function loadFileAndInsert() {
-    console.log('digite o nome do arquivo com o formato: \n\texemplo: arquivo.txt: \t');
-    const fileName = input('> ');
+    console.log('Realizando leitura do arquivo-contas.txt: \t');
+    const fileName = 'arquivo.txt'
 
     const arquivo_string: string | undefined = loadFile(fileName);
 
@@ -141,7 +158,8 @@ function show_menu(): void {
     \t3 - Dar baixa produto \n
     \t4 - Repor produto\n
     \t5 - Listar produtos \n
-    \t6 - Carregar arquivo produtos \n
+    \t6 - Verificar se produto é valido \n
+    \t7 - Carregar arquivo produtos \n
     \t0 - Sair\n`;
     console.log(texto);
 }
@@ -155,6 +173,7 @@ function main() {
         writeOff, 
         replanish,
         listProducts,
+        productIsValid,
         loadFileAndInsert
     )
 

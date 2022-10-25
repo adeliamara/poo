@@ -1,4 +1,5 @@
 import Conta from "./conta";
+import ContaImposto from "./contaImposto";
 import Poupanca from "./poupanca";
 
 export default class Banco {
@@ -62,6 +63,10 @@ export default class Banco {
         let conta: Conta = this.consultar(numero);
 
         if (this.contaJaExiste(numero)) {
+            if(conta instanceof ContaImposto){
+                (<ContaImposto> conta).depositar(valor);
+                return true;
+            }
             conta.depositar(valor);
             return true;
         }
@@ -71,24 +76,28 @@ export default class Banco {
     public debitar(numero: string, valor: number): boolean {
         let conta: Conta = this.consultar(numero);
 
+        let sucesso: boolean = false;
         if (this.contaJaExiste(numero)) {
-            conta.debitar(valor);
-            return true;
+            if(conta instanceof ContaImposto){
+                sucesso = (<ContaImposto> conta).debitar(valor);
+            }else{
+                sucesso = conta.debitar(valor);
+            }
         }
 
-        return false;
+        return sucesso;
     }
 
-    public transferir(numeroCredito: string, numeroDebito: string, valor: number): boolean {
-
+    public transferir(numeroDebito: string, numeroCredito: string, valor: number): boolean {
+        let sucesso: boolean= false;
         if (this.contaJaExiste(numeroCredito) && this.contaJaExiste(numeroCredito)) {
-            let contaCredito: Conta = this.consultar(numeroCredito);
-            let contaDebito: Conta = this.consultar(numeroDebito);
-
-            contaDebito.transferir(contaCredito, valor);
+            if(this.debitar(numeroDebito, valor)){
+                this.depositar(numeroCredito, valor);
+                sucesso = true;
+            }
         }
 
-        return this.contaJaExiste(numeroCredito) && this.contaJaExiste(numeroCredito);
+        return sucesso;
 
     }
 

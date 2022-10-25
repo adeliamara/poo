@@ -18,4 +18,11 @@ export default class ContaImposto extends Conta {
         return false;
     }
 
+    public depositar(valor: number): void {
+        const valor_depositado = valor * (1 - this._taxaDesconto / 100);
+        this.saldo = this.saldo + valor_depositado;
+    
+    }
+
+
 }

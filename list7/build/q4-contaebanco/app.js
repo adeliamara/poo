@@ -76,8 +76,8 @@ function renderJuros() {
     }
 }
 function recuperarArquivoECadasrar() {
-    console.log('digite o nome do arquivo com o formato: \n\texemplo: arquivo.txt: \t');
-    const fileName = (0, io_utils_1.input)('> ');
+    console.log('Realizando leitura do arquivo-contas.txt: \t');
+    const fileName = 'arquivo-contas.txt';
     const arquivo_string = (0, io_utils_1.loadFile)(fileName);
     if (arquivo_string != undefined) {
         let accounts = arquivo_string.split('\n');
