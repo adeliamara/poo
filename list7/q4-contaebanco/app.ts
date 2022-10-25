@@ -61,23 +61,40 @@ function consultar(): boolean {
     return true;
 }
 
-function sacar(): boolean {
+function sacar(): void {
     let numero: string = input('Digite o número da conta a sacar: ');
     let valor: number = Number(input(`Insira o valor: `));
-    return banco.debitar(numero, valor);
+  
+    if(banco.debitar(numero, valor)){
+        console.log('OPERAÇÃO REALIZADA COM SUCESSO!');
+    }
+    else{
+        console.log('Saldo da conta origem insufienciete ou a conta não existe. Operação falhou! ');
+    }
 }
 
-function depositar(): boolean {
+function depositar(): void {
     let numero: string = input('Digite o número da conta a realizar deposito: ');
     let valor: number = Number(input(`Insira o valor: `));
-    return banco.depositar(numero, valor);
+    if(banco.depositar(numero, valor)){
+        console.log('OPERAÇÃO REALIZADA COM SUCESSO!');
+    }else{
+        console.log('conta não existe. Operação falhou! ');
+    }
 }
 
-function transferir(): boolean {
+function transferir(): void {
     let numeroOrigem: string = input('Digite o número da conta de origem: ');
     let numeroDestino: string = input('Digite o número da conta de destino: ');
     let valor: number = Number(input(`Valor: `));
-    return banco.transferir(numeroOrigem, numeroDestino, valor);
+
+    if(banco.transferir(numeroOrigem, numeroDestino, valor)){
+        console.log('OPERAÇÃO REALIZADA COM SUCESSO!');
+    }
+    else{
+        console.log('Saldo da conta origem insufienciete ou a conta não existe. Operação falhou! ');
+    }
+ 
 }
 
 function renderJuros(): void {

@@ -75,7 +75,7 @@ export default class Banco {
 
     public debitar(numero: string, valor: number): boolean {
         let conta: Conta = this.consultar(numero);
-
+        
         let sucesso: boolean = false;
         if (this.contaJaExiste(numero)) {
             if(conta instanceof ContaImposto){
@@ -84,7 +84,6 @@ export default class Banco {
                 sucesso = conta.debitar(valor);
             }
         }
-
         return sucesso;
     }
 
